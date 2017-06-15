@@ -13,6 +13,14 @@ $ python extract_image_data.py <input_folder_path> <output_csv_path>
 $ python extract_image_data.py images data.csv
 ```
 
+## Requirements
+
+Install the requirements by calling `pip` on the `requirements.txt` file
+
+```bash
+$ pip install -r requirements.txt
+```
+
 ## How it works
 
 Converts all images within **input_folder_path** into a CSV file located in **output_csv_path**.
