@@ -33,7 +33,7 @@ Converts all images within **input_folder_path** into a CSV file located in **ou
   
   - For colored ones, `rank = 3` where the data is a matrix of RGB lists.
 
-- Subsequent columns are the **feature columns** that encode color or each pixel.
+- Subsequent columns are the **feature columns** that encode color of each pixel.
 
 ## Multithreading
 
