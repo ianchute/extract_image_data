@@ -33,7 +33,7 @@ if __name__ == "__main__": # important!
     
 
     if len(sys.argv) != 3:
-        print('Usage: python extract_image_data.py <folder_path>')
+        print('Usage: python extract_image_data.py <input_folder_path> <output_csv_path>')
     else:
         _, inpath, outpath = sys.argv
         n_threads = cpu_count()
