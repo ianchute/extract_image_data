@@ -1,13 +1,19 @@
 # extract_image_data
 Multi-threaded script for converting images to CSV data
 
-```
-Usage: python extract_image_data.py <input_folder_path> <output_csv_path>
+## Usage
+
+```bash
+$ python extract_image_data.py <input_folder_path> <output_csv_path>
 ```
 
+## Example
+
+```bash
+$ python extract_image_data.py images data.csv
 ```
-Example: python extract_image_data.py images data.csv
-```
+
+## How it works
 
 Converts all images within **input_folder_path** into a CSV file located in **output_csv_path**.
 
@@ -20,3 +26,7 @@ Converts all images within **input_folder_path** into a CSV file located in **ou
 For black and white images, rank = 2.
 
 For colored ones, rank = 3 where the data is a matrix of RGB lists.
+
+## Multithreading
+
+There will be `n_cores` number of threads, where `n_cores` is the number of cores in the CPU where the script is being run.
