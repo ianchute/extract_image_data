@@ -12,7 +12,7 @@ def is_image_url(path):
     return bool(IMAGE_REGEX.match(path))
 
 def get_images(path):
-    return list(filter(is_image_url, os.listdir()))
+    return list(map(lambda p: os.path.abspath(os.path.join(path, p)), filter(is_image_url, os.listdir(path))))
 
 def read_image(path):
     _id = os.path.basename(path).split('.')[0]
@@ -37,9 +37,13 @@ if __name__ == "__main__": # DONOT REMOVE THIS LINE - it makes the multithreadin
         _, inpath, outpath = sys.argv
         n_threads = cpu_count()
         images = get_images(inpath)
-        print('found ' + str(len(images)) + ' images, running in ' + str(n_threads) + ' threads')
-        image_data = Pool(n_threads).map(read_image, images)
 
-        all_images_df = pd.concat(image_data, axis=0)
-        all_images_df.set_index('id', inplace=True)
-        all_images_df.to_csv(outpath)
+        if len(images) == 0:
+            print('no images found!')
+        else:
+            print('found ' + str(len(images)) + ' images, running in ' + str(n_threads) + ' threads')
+            image_data = Pool(n_threads).map(read_image, images)
+
+            all_images_df = pd.concat(image_data, axis=0)
+            all_images_df.set_index('id', inplace=True)
+            all_images_df.to_csv(outpath)
