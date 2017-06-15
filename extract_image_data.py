@@ -29,8 +29,7 @@ def read_image(path):
         print(e)
         return e
 
-if __name__ == "__main__": # important!
-    
+if __name__ == "__main__": # DONOT REMOVE THIS LINE - it makes the multithreading part work.
 
     if len(sys.argv) != 3:
         print('Usage: python extract_image_data.py <input_folder_path> <output_csv_path>')
