@@ -1,5 +1,6 @@
 # extract_image_data (Images2CSV)
-Multi-threaded script for converting a large number of images to CSV data
+
+Fast multithreaded script for converting a large number of images to CSV data
 
 ## Usage
 
