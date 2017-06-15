@@ -4,7 +4,7 @@ from imageio import imread
 import re
 import os
 import sys
-import pandas as pd
+import numpy as np
 
 IMAGE_REGEX = re.compile("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")
 
@@ -20,11 +20,10 @@ def read_image(path):
     try:
         image = imread(path)
         image_flat = image.flatten()
-        image_df = pd.DataFrame([image_flat], columns=['feature_' + str(col) for col in range(len(image_flat))])
-        image_df['id'] = _id
-        image_df['shape'] = str(image.shape)
+        prefix = str(_id) + ',"' + str(image.shape) + '",'
+        row = prefix + ','.join(np.char.mod('%d', image_flat))
         print('done: ' + path)
-        return image_df
+        return row
     except Exception as e:
         print(e)
         return e
@@ -43,7 +42,8 @@ if __name__ == "__main__": # DONOT REMOVE THIS LINE - it makes the multithreadin
         else:
             print('found ' + str(len(images)) + ' images, running in ' + str(n_threads) + ' threads')
             image_data = Pool(n_threads).map(read_image, images)
+            csv_data = '\n'.join(image_data)
 
-            all_images_df = pd.concat(image_data, axis=0)
-            all_images_df.set_index('id', inplace=True)
-            all_images_df.to_csv(outpath)
+            with open(outpath, 'w') as f:
+                f.write(csv_data)
+            
